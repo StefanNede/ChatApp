@@ -175,6 +175,32 @@ app.get("/get-messages", (req, res) => {
     })
 })
 
+app.post("/delete-room", (req, res) => {
+    const roomName = req.body.roomName
+    const username = req.body.username
+    console.log(roomName, username)
+    // only let the user delete the room if they are the user that created it
+    db.query("SELECT creator FROM rooms WHERE name = ?", 
+            roomName, 
+            (err, result) => {
+                if (err) {
+                    res.send({err:err})
+                } 
+                else if (username == result[0].creator) {
+                    // delete the table for that room and delete that table from rooms table
+                    db.query("DROP TABLE " + roomName, (err, res) => {
+                        console.log(err)
+                    })
+                    db.query("DELETE FROM rooms WHERE name = ?", roomName, (err, res) => {
+                        console.log(err)
+                    })
+                    console.log("room deleted successfully")
+                } else {
+                    res.send({message: username + " does not have perms to delete this chat"})
+                }
+            })
+})
+
 server.listen(3001, () => {
     console.log("server is running")
 })

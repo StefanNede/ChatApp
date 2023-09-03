@@ -22,7 +22,7 @@ export default function Home() {
     // every refresh get all the current rooms from the database
     Axios.get("http://localhost:3001/get-rooms").then((response) => {
       console.log(response.data)
-      if (response.data) {
+      if (response.data.message !== "no rooms found") {
         let rooms = []
         for (let room of response.data) {
           console.log(room.name)

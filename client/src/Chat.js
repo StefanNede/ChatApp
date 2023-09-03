@@ -46,11 +46,22 @@ const Chat = ({socket, username, room, showChat, setShowChat}) => {
         })
     }, [socket])
 
+    const deleteChat = () => {
+        Axios.post("http://localhost:3001/delete-room", {roomName: room, username: username}).then((response) => {
+            console.log(response)
+            if (response.data) {
+                alert(response.data.message)
+            } 
+        })
+        window.location.reload()
+    }
+
     return (
         <div className="chat-page">
             <div className="chat-window">
                 <div className="chat-header">
                     <p>Room {room}</p>
+                    <button className="delete-chat-btn" onClick={deleteChat}>x</button>
                 </div>
                 <div className="chat-body">
                     <ScrollToBottom className="message-container">
