@@ -1,10 +1,12 @@
 import React, { useState, useMemo } from "react"
 import ScrollToBottom from "react-scroll-to-bottom";
+import Axios from "axios"
 
 const Chat = ({socket, username, room, showChat, setShowChat}) => {
     const [currentMessage, setCurrentMessage] = useState("")
     const [messageList, setMessageList] = useState([])
 
+    Axios.defaults.withCredentials = true
     const sendMessage = async () => {
         if (currentMessage !== "") {
             const messageData = {
@@ -13,10 +15,12 @@ const Chat = ({socket, username, room, showChat, setShowChat}) => {
                 message: currentMessage,
             }
 
+            Axios.post("http://localhost:3001/sent-message", {message: currentMessage, username: username, roomName: room}).then((response) => {
+                console.log(response)
+            })
             await socket.emit("send_message", messageData)
             setMessageList((list) => [...list, messageData])
             setCurrentMessage("")
-
         }
     }
 

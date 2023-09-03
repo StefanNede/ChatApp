@@ -125,7 +125,6 @@ app.post("/login", (req, res) => {
 app.post("/create-room", (req, res) => {
     const username = req.body.username
     const roomName = req.body.roomName
-    console.log(roomName)
     db.query("INSERT INTO rooms (creator, name) VALUES (?,?)", 
             [username, roomName], 
             (err, result) => {
@@ -149,6 +148,17 @@ app.get("/get-rooms", (req, res) => {
             res.send({message: "no rooms found"})
         }
     }) 
+})
+
+app.post("/sent-message", (req, res) => {
+    const messageSent = req.body.message
+    const writer = req.body.username
+    const roomName = req.body.roomName
+    db.query("INSERT INTO " + roomName + " (message, writer) VALUES (?,?)",
+            [messageSent, writer],
+            (err, result) => {
+                console.log(err)
+            })
 })
 
 server.listen(3001, () => {
