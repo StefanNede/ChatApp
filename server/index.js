@@ -125,8 +125,16 @@ app.post("/login", (req, res) => {
 app.post("/create-room", (req, res) => {
     const username = req.body.username
     const roomName = req.body.roomName
-    db.query("INSERT INTO rooms (creator, name) VALUES (?,?)", [username, roomName], (err, result) => {
-        console.log(err)
+    console.log(roomName)
+    db.query("INSERT INTO rooms (creator, name) VALUES (?,?)", 
+            [username, roomName], 
+            (err, result) => {
+                console.log(err)
+    })
+    // create a new table for that room that stores all the messages sent on that room
+    db.query("CREATE TABLE " + roomName + " AS SELECT id, message, writer FROM chat_blueprint",
+            (err, result) => {
+                console.log(err)
     })
 })
 
