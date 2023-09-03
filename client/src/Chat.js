@@ -11,7 +11,6 @@ const Chat = ({socket, username, room, showChat, setShowChat}) => {
                 room: room,
                 author: username,
                 message: currentMessage,
-                time: new Date(Date.now()).getHours() + ":" + new Date(Date.now()).getMinutes()
             }
 
             await socket.emit("send_message", messageData)
@@ -47,7 +46,6 @@ const Chat = ({socket, username, room, showChat, setShowChat}) => {
                                 <p>{messageContent.message}</p>
                             </div>
                             <div className="message-meta">
-                                <p id="time">{messageContent.time}</p>
                                 <p id="author">{messageContent.author}</p>
                             </div>
                             </div>
