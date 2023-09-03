@@ -1,0 +1,22 @@
+nav {
+    width: 100vw;
+    padding-top: 0.5vh;
+    padding-bottom: 0.5vh;
+    background-color: lightblue;
+}
+nav ul {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+    list-style-type: none;
+}
+
+.link {
+    text-decoration: none;
+    color: white;
+}
+
+.link:hover {
+    text-decoration: underline;
+}

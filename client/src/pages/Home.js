@@ -75,8 +75,8 @@ export default function Home() {
   }
 
   return (
-    <div className="App">
-      <div>
+    <>
+      <div className="loggedInArea">
         {loggedIn ? 
           <div>
             Logged in as {loggedInUsername}
@@ -89,25 +89,28 @@ export default function Home() {
           </div>
         }
       </div>
-      {!showChat ?
-      <div className="joinChatContainer">
-        <div className="create-chat-area">
-          <h3>chat app</h3>
-          <p>create a chat or join an available one</p>
-          <input type="text" placeholder="Lebron James" onChange={(event) => updateUsername(event)}/>
-          <input type="text" placeholder="room ID" onChange={(event) => {setRoom(event.target.value)}}/>
-          <button onClick={createRoom}>create room</button>
+      <div className="App">
+        
+        {!showChat ?
+        <div className="joinChatContainer">
+          <div className="create-chat-area">
+            <h3>chat app</h3>
+            <p>create a chat or join an available one</p>
+            <input type="text" placeholder="Lebron James" onChange={(event) => updateUsername(event)}/>
+            <input type="text" placeholder="room ID" onChange={(event) => {setRoom(event.target.value)}}/>
+            <button onClick={createRoom}>create room</button>
+          </div>
+          <div className="available-rooms">
+            {availableRooms.map((availableRoom) => {
+              return <button className="available-room" onClick={() => joinRoom(availableRoom)}> {availableRoom} </button>
+            })}
+          </div>
         </div>
-        <div className="available-rooms">
-          {availableRooms.map((availableRoom) => {
-            return <button className="available-room" onClick={() => joinRoom(availableRoom)}> {availableRoom} </button>
-          })}
-        </div>
-      </div>
-      :
-      <Chat socket={socket} username={username} room={room} showChat={showChat} setShowChat={setShowChat}/>
-      }
+        :
+        <Chat socket={socket} username={username} room={room} showChat={showChat} setShowChat={setShowChat}/>
+        }
 
-    </div>
+      </div>
+    </>
   );
 }

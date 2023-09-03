@@ -30,11 +30,6 @@ const Chat = ({socket, username, room, showChat, setShowChat}) => {
 
     return (
         <div className="chat-page">
-            <div className="top-bar">
-                <div className="top-bar-buttons">
-                    <button className="home-btn" onClick={() => {setShowChat(false)}}> home </button>
-                </div>
-            </div>
             <div className="chat-window">
                 <div className="chat-header">
                     <p>Room {room}</p>

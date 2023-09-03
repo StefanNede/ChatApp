@@ -1,6 +1,6 @@
 .App {
   width: 100vw;
-  height: 100vh;
+  height: 80vh;
   background: #fff;
   color: #212121;
   font-family: "Open Sans", sans-serif;
@@ -195,6 +195,7 @@ body {
 }
 
 .chat-page {
+  margin-top:10vh;
   height: 100vh;
   width:100vw;
   display:flex;
@@ -252,3 +253,10 @@ body {
 .available-rooms button:hover {
   background: rgb(138, 186, 201);
 }
+
+.loggedInArea {
+  text-align: center;
+  padding-top: 2vh;
+  padding-bottom: 2vh;
+}
+
