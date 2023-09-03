@@ -161,6 +161,20 @@ app.post("/sent-message", (req, res) => {
             })
 })
 
+app.get("/get-messages", (req, res) => {
+    const roomName = req.query.roomName
+    db.query("SELECT * FROM " + roomName, (err, result) => {
+        if (err) {
+            res.send({err:err})
+        }
+        if (result.length > 0) {
+            res.send(result)
+        } else {
+            res.send({message: "no previous messages found"})
+        }
+    })
+})
+
 server.listen(3001, () => {
     console.log("server is running")
 })

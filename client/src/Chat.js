@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from "react"
+import React, { useState, useMemo, useEffect } from "react"
 import ScrollToBottom from "react-scroll-to-bottom";
 import Axios from "axios"
 
@@ -7,6 +7,21 @@ const Chat = ({socket, username, room, showChat, setShowChat}) => {
     const [messageList, setMessageList] = useState([])
 
     Axios.defaults.withCredentials = true
+    useEffect(() => {
+        // load all past messages
+        Axios.get("http://localhost:3001/get-messages", { params: { roomName: room } }).then((response) => {
+            if (response.data.message !== "no previous messages found") {
+                let messages = []
+                for (let message of response.data) {
+                    messages.push({room: room,
+                                    author: message.writer,
+                                    message: message.message})
+                }
+                setMessageList(messages)
+            }
+        })
+    }, [])
+
     const sendMessage = async () => {
         if (currentMessage !== "") {
             const messageData = {
