@@ -40,6 +40,7 @@ export default function Login(props) {
     }, [])
 
     return (
+        <>
         <div className="LoginPageContainer">
             <div className="registration">
                 <h1>Registration</h1>
@@ -70,7 +71,8 @@ export default function Login(props) {
                 <button onClick={login}>Login</button>
             </div>
 
-            <h1>{loginStatus}</h1>
         </div>
+        <h1 className="login-status">{loginStatus}</h1>
+        </>
     )
 }

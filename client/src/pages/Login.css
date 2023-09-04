@@ -1,6 +1,6 @@
 .LoginPageContainer {
     display:flex;
-    height: 90vh;
+    height: 80vh;
     justify-content: space-around;
 }
 
@@ -13,7 +13,7 @@ input {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    height:80vh;
+    height:70vh;
     width: 50vw;
 }
 
@@ -37,7 +37,7 @@ input {
     flex-direction: column;
     align-items: center;
     width:50vw;
-    height:80vh;
+    height:70vh;
     justify-content: center;
 }
 
@@ -52,11 +52,15 @@ input {
     margin-top:2vh;
 }
 
+.login-status {
+    text-align: center;
+}
+
 @media only screen and (max-width: 600px) {
     .LoginPageContainer {
         display:flex;
         flex-direction: column;
-        height: 90vh;
+        height: 80vh;
         align-items: center;
     }
 
