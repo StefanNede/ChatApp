@@ -75,15 +75,25 @@ const db = mysql.createConnection({
 app.post("/register", (req, res) => {
     const username = req.body.username
     const password = req.body.password
-    
-    // hashing the password
-    bcrypt.hash(password, saltRounds, (err, hash) => {
+
+    // check if user with that username already exists and tell them to use a different username
+    db.query("SELECT * FROM users where username = ?", username, (err, result) => {
         if (err) {
-            console.log(err)
+            res.send({err:err})
+        } 
+        if (result.length > 0) {
+            res.send({message: "username already exists"})
+        } else {
+            // hashing the password
+            bcrypt.hash(password, saltRounds, (err, hash) => {
+                if (err) {
+                    console.log(err)
+                }
+                db.query("INSERT INTO users (username, password) VALUES (?,?)", [username, hash], (err, result) => {
+                    console.log(err)
+                })
+            })
         }
-        db.query("INSERT INTO users (username, password) VALUES (?,?)", [username, hash], (err, result) => {
-            console.log(err)
-        })
     })
 })
 
