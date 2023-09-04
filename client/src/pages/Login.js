@@ -1,5 +1,6 @@
 import { useState, useEffect} from "react"
 import Axios from "axios"
+import "./Login.css"
 
 export default function Login(props) {
     const [usernameReg, setUsernameReg] = useState("")
@@ -39,19 +40,33 @@ export default function Login(props) {
     }, [])
 
     return (
-        <div>
+        <div className="LoginPageContainer">
             <div className="registration">
                 <h1>Registration</h1>
-                <label>Username</label>
-                <input type="text" onChange={(event) => setUsernameReg(event.target.value)}/>
-                <label>Password</label>
-                <input type="text" onChange={(event) => setPasswordReg(event.target.value)}/>
+                <div className="register-inp-area">
+                    <div>
+                        <label>Username</label>
+                        <input type="text" onChange={(event) => setUsernameReg(event.target.value)}/>
+                    </div>
+                    <div>
+                        <label>Password</label>
+                        <input type="text" onChange={(event) => setPasswordReg(event.target.value)}/>
+                    </div>
+                </div>
                 <button onClick={register}>Register</button>
             </div>
             <div className="login"> 
                 <h1>Login</h1>
-                <input type="text" placeholder="Username..." onChange={(event) => setUsername(event.target.value)}/>
-                <input type="password" placeholder="Password..." onChange={(event) => setPassword(event.target.value)}/>
+                <div className="login-inp-area">
+                    <div>
+                        <label>Username</label>
+                        <input type="text" onChange={(event) => setUsername(event.target.value)}/>
+                    </div>
+                    <div>
+                        <label>Password</label>
+                        <input type="password" onChange={(event) => setPassword(event.target.value)}/>
+                    </div>
+                </div>
                 <button onClick={login}>Login</button>
             </div>
 
