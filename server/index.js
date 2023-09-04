@@ -136,26 +136,15 @@ app.post("/create-room", (req, res) => {
     const username = req.body.username
     const roomName = req.body.roomName
 
-    // check if room name already exists
-    db.query("SELECT * FROM rooms WHERE name = ?", roomName, (err, result) => {
-        if (err) {
-            res.send({err:err})
-        } 
-
-        if (result.length > 0) {
-            res.send({message: "a room with this name already exists - pick a different name"})
-        } else {
-            db.query("INSERT INTO rooms (creator, name) VALUES (?,?)", 
-                    [username, roomName], 
-                    (err, result) => {
-                        console.log(err)
-            })
-            // create a new table for that room that stores all the messages sent on that room
-            db.query("CREATE TABLE " + roomName + " AS SELECT id, message, writer FROM chat_blueprint",
-                    (err, result) => {
-                        console.log(err)
-            })
-        }
+    db.query("INSERT INTO rooms (creator, name) VALUES (?,?)", 
+            [username, roomName], 
+            (err, result) => {
+                console.log(err)
+    })
+    // create a new table for that room that stores all the messages sent on that room
+    db.query("CREATE TABLE " + roomName + " AS SELECT id, message, writer FROM chat_blueprint",
+            (err, result) => {
+                console.log(err)
     })
 })
 

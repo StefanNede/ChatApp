@@ -11,7 +11,7 @@ export default function Login(props) {
     Axios.defaults.withCredentials = true
     const register = () => {
         Axios.post("http://localhost:3001/register", {username: usernameReg, password: passwordReg}).then((response) => {
-            if (response.data.message) {
+            if (response.data) {
                 alert(response.data.message)
             }
             console.log(response)

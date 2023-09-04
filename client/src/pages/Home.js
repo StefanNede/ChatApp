@@ -51,7 +51,7 @@ export default function Home() {
       socket.emit("join_room", room)
       setAvailableRooms([...availableRooms, room])
       Axios.post("http://localhost:3001/create-room", {username: username, roomName: room}).then((response) => {
-        if (response.data.message) {
+        if (response.data) {
           alert(response.data.message)
         }
         console.log(response)
